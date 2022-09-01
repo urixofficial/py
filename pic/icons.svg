@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46667 135.46667"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="icons.svg.2022_08_19_16_01_24.0.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:showpageshadow="false"
+     showborder="true"
+     units="px"
+     inkscape:zoom="0.73000916"
+     inkscape:cx="262.32547"
+     inkscape:cy="304.10577"
+     inkscape:window-width="1280"
+     inkscape:window-height="755"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="true"
+     inkscape:snap-others="false"
+     inkscape:object-nodes="false"
+     inkscape:snap-nodes="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:bbox-nodes="false"
+     inkscape:bbox-paths="false"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-page="false">
+    <sodipodi:guide
+       position="15.0519,0"
+       orientation="135.4667,0"
+       id="guide1333" />
+    <sodipodi:guide
+       position="30.1037,0"
+       orientation="135.4667,0"
+       id="guide1335" />
+    <sodipodi:guide
+       position="45.1556,0"
+       orientation="135.4667,0"
+       id="guide1337" />
+    <sodipodi:guide
+       position="60.2074,0"
+       orientation="135.4667,0"
+       id="guide1339" />
+    <sodipodi:guide
+       position="75.2593,0"
+       orientation="135.4667,0"
+       id="guide1341" />
+    <sodipodi:guide
+       position="90.3111,0"
+       orientation="135.4667,0"
+       id="guide1343" />
+    <sodipodi:guide
+       position="105.363,0"
+       orientation="135.4667,0"
+       id="guide1345" />
+    <sodipodi:guide
+       position="120.415,0"
+       orientation="135.4667,0"
+       id="guide1347" />
+    <sodipodi:guide
+       position="0,15.0519"
+       orientation="0,135.4667"
+       id="guide1349" />
+    <sodipodi:guide
+       position="0,30.1037"
+       orientation="0,135.4667"
+       id="guide1351" />
+    <sodipodi:guide
+       position="0,45.1556"
+       orientation="0,135.4667"
+       id="guide1353" />
+    <sodipodi:guide
+       position="0,60.2074"
+       orientation="0,135.4667"
+       id="guide1355" />
+    <sodipodi:guide
+       position="0,75.2593"
+       orientation="0,135.4667"
+       id="guide1357" />
+    <sodipodi:guide
+       position="0,90.3111"
+       orientation="0,135.4667"
+       id="guide1359" />
+    <sodipodi:guide
+       position="0,105.363"
+       orientation="0,135.4667"
+       id="guide1361" />
+    <sodipodi:guide
+       position="0,120.415"
+       orientation="0,135.4667"
+       id="guide1363" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <linearGradient
+       id="white"
+       inkscape:swatch="solid"
+       gradientTransform="matrix(0,0,0,0,496.5084,489.74593)">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop1540" />
+    </linearGradient>
+    <linearGradient
+       id="green"
+       inkscape:swatch="solid"
+       gradientTransform="matrix(0,0,0,0,0.00140305,8.2673827e-4)">
+      <stop
+         style="stop-color:#00a000;stop-opacity:1;"
+         offset="0"
+         id="stop1512" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <g
+       id="g4694"
+       inkscape:label="table"
+       style="display:none"
+       inkscape:export-filename="/Users/urix/py/sqlite/pic/edit_table.png"
+       inkscape:export-xdpi="131.65717"
+       inkscape:export-ydpi="131.65717">
+      <path
+         style="font-variation-settings:normal;fill:none;fill-opacity:1;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+         d="m 15.0519,15.05167 h 90.3111 v 90.3113 H 15.0519 v -90.3113"
+         id="path2295" />
+      <path
+         style="font-variation-settings:normal;fill:none;fill-opacity:1;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+         d="M 15.0519,45.155571 H 105.363"
+         id="path2428" />
+      <path
+         style="font-variation-settings:normal;fill:none;fill-opacity:1;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+         d="M 15.0519,75.259271 H 105.363"
+         id="path2430" />
+      <path
+         style="font-variation-settings:normal;fill:none;fill-opacity:1;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+         d="m 45.1556,15.05167 v 90.3113"
+         id="path2432" />
+      <path
+         style="font-variation-settings:normal;fill:none;fill-opacity:1;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+         d="m 75.2593,15.05167 v 90.3113"
+         id="path2434" />
+    </g>
+    <g
+       id="g1536"
+       inkscape:label="row"
+       transform="translate(-4.9999999e-5,-30.103751)"
+       style="display:inline"
+       inkscape:export-filename="/Users/urix/py/sqlite/pic/edit_row.png"
+       inkscape:export-xdpi="131.65717"
+       inkscape:export-ydpi="131.65717">
+      <path
+         style="display:inline;fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 15.0519,45.155571 h 90.3111 v 30.1037 H 15.0519 v -30.1037"
+         id="path1350" />
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 45.1556,45.155571 v 30.1037"
+         id="path1385" />
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 75.2593,45.155571 v 30.1037"
+         id="path1420" />
+    </g>
+    <g
+       id="g4687"
+       inkscape:label="add"
+       style="display:none"
+       transform="translate(-30.103795)"
+       inkscape:export-filename="/Users/urix/py/sqlite/pic/add_table.png"
+       inkscape:export-xdpi="131.65717"
+       inkscape:export-ydpi="131.65717">
+      <ellipse
+         style="fill:url(#green);fill-opacity:1;stroke:url(#white);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2574"
+         cx="90.311195"
+         cy="90.311066"
+         rx="30.1038"
+         ry="30.103701" />
+      <path
+         style="fill:url(#white);fill-opacity:1;stroke:url(#white);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 75.2593,90.31107 H 105.363"
+         id="path2856" />
+      <path
+         style="fill:url(#white);fill-opacity:1;stroke:url(#white);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 90.311099,75.259271 V 105.36297"
+         id="path2924" />
+    </g>
+    <g
+       id="g3484"
+       inkscape:label="del"
+       style="display:none"
+       transform="translate(-30.103795)"
+       inkscape:export-filename="/Users/urix/py/sqlite/pic/del_row.png"
+       inkscape:export-xdpi="131.65717"
+       inkscape:export-ydpi="131.65717">
+      <ellipse
+         style="fill:url(#green);fill-opacity:1;stroke:url(#white);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3147"
+         cx="90.311195"
+         cy="90.311066"
+         rx="30.1038"
+         ry="30.103701"
+         inkscape:export-filename="/Users/urix/py/sqlite/pic/del_table.png"
+         inkscape:export-xdpi="131.65717"
+         inkscape:export-ydpi="131.65717" />
+      <path
+         style="fill:url(#white);fill-opacity:1;stroke:url(#white);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 75.259395,90.31107 H 105.3631"
+         id="path3439"
+         sodipodi:nodetypes="cc"
+         inkscape:export-filename="/Users/urix/py/sqlite/pic/del_table.png"
+         inkscape:export-xdpi="131.65717"
+         inkscape:export-ydpi="131.65717" />
+    </g>
+    <g
+       id="g4622"
+       style="display:inline"
+       inkscape:label="edit"
+       transform="rotate(45,75.259298,53.972571)"
+       inkscape:export-filename="/Users/urix/py/sqlite/pic/edit_row.png"
+       inkscape:export-xdpi="131.65717"
+       inkscape:export-ydpi="131.65717">
+      <ellipse
+         style="display:inline;fill:url(#green);fill-opacity:1;stroke:url(#white);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3560"
+         cx="90.311195"
+         cy="90.311066"
+         rx="30.1038"
+         ry="30.103701"
+         inkscape:export-filename="/Users/urix/py/sqlite/pic/edit_table.png"
+         inkscape:export-xdpi="131.65717"
+         inkscape:export-ydpi="131.65717" />
+      <g
+         id="g1010"
+         transform="rotate(-45,77.785348,85.122594)"
+         inkscape:export-filename="/Users/urix/py/sqlite/pic/edit_table.png"
+         inkscape:export-xdpi="131.65717"
+         inkscape:export-ydpi="131.65717">
+        <path
+           style="fill:url(#white);fill-opacity:1;stroke:url(#white);stroke-width:12.7;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+           d="m 92.230254,88.391927 -9.786643,9.786645"
+           id="path4319" />
+        <path
+           sodipodi:type="star"
+           style="fill:url(#white);fill-opacity:1;stroke:url(#white);stroke-width:48;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+           id="path4527"
+           inkscape:flatsided="true"
+           sodipodi:sides="3"
+           sodipodi:cx="341.33328"
+           sodipodi:cy="455.11093"
+           sodipodi:r1="12.159563"
+           sodipodi:r2="6.0797815"
+           sodipodi:arg1="1.1464903e-06"
+           sodipodi:arg2="1.0471987"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           transform="matrix(-0.08618336,0.08618336,-0.08618336,-0.08618336,141.7368,117.33135)"
+           inkscape:transform-center-x="-0.37050799"
+           inkscape:transform-center-y="1.745525e-06"
+           d="m 353.49285,455.11095 -18.23936,10.53046 2e-5,-21.06098 z" />
+      </g>
+    </g>
+    <g
+       id="g3189"
+       style="display:none"
+       inkscape:label="export"
+       inkscape:export-filename="/Users/urix/py/sqlite/pic/edit_row.png"
+       inkscape:export-xdpi="131.65717"
+       inkscape:export-ydpi="131.65717">
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 30.1037,60.20737 H 15.0519 v 60.2074 H 105.363 V 60.20737 H 90.3111"
+         id="path1927"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 45.1556,45.15557 15.0518,-15.0519 15.0519,15.0519"
+         id="path3149"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 60.2074,36.77411 V 90.31107"
+         id="path3151"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       id="g3726"
+       style="display:none"
+       inkscape:label="import"
+       inkscape:export-filename="/Users/urix/py/sqlite/pic/import.png"
+       inkscape:export-xdpi="131.65717"
+       inkscape:export-ydpi="131.65717">
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 30.1037,60.20737 H 15.0519 v 60.2074 H 105.363 V 60.20737 H 90.3111"
+         id="path3720"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 45.1556,75.25927 15.0518,15.0518 15.0519,-15.0518"
+         id="path3722"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:url(#green);stroke-width:8.46667;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         d="M 60.2074,30.10367 V 82.416655"
+         id="path3724"
+         sodipodi:nodetypes="cc" />
+    </g>
+  </g>
+</svg>

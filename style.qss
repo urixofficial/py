@@ -1,0 +1,226 @@
+QWidget{
+	background: white;
+	border: none;
+	color: black;
+	selection-color: white;
+	selection-background-color: rgb(0, 160, 0);
+}
+
+QLabel#statusBar {
+	border: 1px solid white;
+	border-top-color: rgb(0, 160, 0);
+	padding-top: 20px;
+}
+
+QLineEdit, QDateEdit {
+	border: 1px solid white;
+	border-bottom-color: rgb(0, 160, 0);
+	padding: 2px;
+}
+
+QDateEdit::up-arrow {
+	border: none;
+	image: url(pic/up_arrow.png);
+	padding: -3px;
+}
+
+QDateEdit::down-arrow {
+	border: none;
+	image: url(pic/down_arrow.png);
+	padding: -3px;
+}
+
+QPushButton {
+	background: rgb(0,160,0);
+	color: white;
+	border: 2px solid rgb(0,160,0);
+	border-radius: 5px;
+	padding: 5px;
+}
+
+QPushButton:hover {
+	background: rgb(0,180,0);
+}
+
+QPushButton#control {
+	background-color: white;
+	border: 2px solid white;
+	width: 48;
+	height: 48;
+	/*image: url(pic/add_table.png);*/
+}
+
+QPushButton:hover#control {
+	border: 2px solid rgb(160, 230, 160);
+}
+
+QPushButton:pressed#control {
+	background-color: rgb(160, 230, 160);
+}
+
+QComboBox {
+	border: 2px solid rgb(0, 160, 0);
+	border-radius: 5px;
+	padding: 5px;
+}
+
+QComboBox::drop-down {
+	border: 0px;
+}
+
+QComboBox::down-arrow {
+	image: url(pic/down_arrow.png);
+}
+
+QComboBox::down-arrow:on {
+	image: url(pic/up_arrow.png);
+}
+
+QDateEdit::drop-down {
+	border: 0px;
+}
+
+QDateEdit::down-arrow:on {
+	image: url(pic/up_arrow.png);
+}
+
+QCheckBox::indicator {
+	width: 23px;
+	height: 22px;
+}
+
+QCheckBox::indicator:checked {
+	image: url(pic/checkbox_checked);
+}
+
+QCheckBox::indicator:unchecked {
+	image: url(pic/checkbox_unchecked);
+}
+
+QCheckBox#disabled ::indicator:unchecked {
+	image: url(pic/checkbox_disabled);
+}
+
+QCalendarWidget QToolButton {
+	height: 40px;
+	width: 50px;
+	color: black;
+	font: 14px;
+}
+
+QCalendarWidget QTableView {
+	alternate-background-color: lightgreen;
+}
+
+QCalendarWidget QMenu {
+	width: 120px;
+	left: 50px;
+	color: black;
+	background-color: white;
+	selection-background-color: lightgreen;
+	selection-color: black;
+}
+
+QCalendarWidget QHeaderView {
+	qproperty-minimumSectionSize:0;
+	border-radius:10px;
+}
+
+#qt_calendar_calendarview {
+	background-color: white;
+	/*border: 1px solid black;*/
+}
+
+#qt_calendar_prevmonth {
+	icon-size: 23px;
+	qproperty-icon: url(pic/left_arrow.png);
+}
+#qt_calendar_nextmonth {
+	icon-size: 23px;
+	qproperty-icon: url(pic/right_arrow.png);
+}
+
+#qt_calendar_monthbutton {
+	background-color: transparent;
+	outline: 46px;
+}
+
+#qt_calendar_yearbutton {
+	background-color: transparent;
+}
+#qt_calendar_yearedit {
+	background-color: transparent;
+}
+
+#qt_calendar_navigationbar {
+	background-color: white;
+	/*border: 1px solid black;*/
+}
+
+QCalendarWidget QAbstractItemView {
+	color: transparent;
+	selection-background-color: lightgreen;
+	selection-color: black;
+}
+
+QCalendarWidget QAbstractItemView:disabled {
+	color: transparent;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+	color: black;
+}
+
+QAbstractItemView {
+	outline: none;
+	border: none;
+	color: black;
+	background-color: white;
+}
+
+QScrollBar {
+	background: white;
+	width: 10px;
+}
+
+QScrollBar::handle:vertical {
+	background: rgb(0, 160, 0);
+	border: 2px solid white;
+	min-height: 20px;
+}
+
+QTableWidget QComboBox {
+	border: 1px solid white;
+	border-bottom-color: rgb(0, 160, 0);
+	border-radius: none;
+}
+
+QHeaderView::section {
+	background: white;
+	color: rgb(0, 160, 0);
+	font-weight: bold;
+	margin: 1px;
+	border: 1px solid white;
+	border-bottom: 1px solid rgb(0, 160, 0);
+	padding: 5px;
+}
+
+QLineEdit#filter {
+	margin-top: 2px;
+	border-top-color: rgb(0, 160, 0);
+}
+
+QTableView {
+	selection-color: black;
+	selection-background-color: rgb(160, 230, 160);
+}
+
+QTableView QLabel {
+	border: 1px solid white;
+	border-bottom-color: rgb(0, 160, 0);
+}
+/*QTableView::item {
+	margin: 1px;
+	border: 1px solid white;
+	border-bottom: 1px solid rgb(0, 160, 0);
+}*/
