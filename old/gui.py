@@ -242,7 +242,9 @@ class MainWindow(QWidget):
 			con.close()
 
 			# обновить форму
-			self.updateForm(dbPath)
+
+
+self.updateForm(dbPath)
 
 			# выбрать вновь созданную таблицу
 			self.tablesBox.setCurrentText(dialog.tableName)
@@ -290,7 +292,9 @@ class MainWindow(QWidget):
 			con.close()
 
 			# обновить форму
-			self.updateForm(dbPath)
+
+
+self.updateForm(dbPath)
 
 	# ================================================= Редактирование таблицы =============================================
 
@@ -318,7 +322,7 @@ class MainWindow(QWidget):
 				tableName = dialog.tableName
 
 				# обновить форму
-				self.updateForm(dbPath)
+		self.updateForm(dbPath)
 
 				# выбрать вновь созданную таблицу
 				self.tablesBox.setCurrentText(dialog.tableName)
@@ -332,7 +336,7 @@ class MainWindow(QWidget):
 					logger.info(f'Изменение имени столбца {oldHeader} на {newHeader}')
 					cur.execute(f'ALTER TABLE {dialog.tableName} RENAME COLUMN {oldHeader} TO {newHeader}')
 					con.commit()
-					self.showTable(dbPath, tableName)
+                    self.showTable(dbPath, tableName)
 
 			# закрытие подключения
 			con.close()
@@ -367,7 +371,7 @@ class MainWindow(QWidget):
 			con.close()
 
 			# обновить таблицу
-			self.showTable(dbPath, tableName)
+            self.showTable(dbPath, tableName)
 
 	# =============================================== Удаление записи ===============================================
 
@@ -427,7 +431,7 @@ class MainWindow(QWidget):
 			con.close()
 
 			# обновить таблицу
-			self.showTable(dbPath, tableName)
+            self.showTable(dbPath, tableName)
 
 	# =============================================== Редактирование записи ===============================================
 
@@ -463,7 +467,7 @@ class MainWindow(QWidget):
 			con.close()
 
 			# обновить таблицу
-			self.showTable(dbPath, tableName)
+            self.showTable(dbPath, tableName)
 
 	# =========================================== Импорт из CSV ==========================================
 
@@ -496,7 +500,8 @@ class MainWindow(QWidget):
 
 		con.close()
 
-		self.updateForm(dbPath)
+
+self.updateForm(dbPath)
 
 	# =========================================== Экспорт в CSV ==========================================
 

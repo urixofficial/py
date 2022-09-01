@@ -1,22 +1,22 @@
 import sys
-from loguru import logger
 
-from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QGridLayout
-from PyQt5.QtWidgets import QComboBox, QDialog, QLabel, QLineEdit, QPushButton
-from PyQt5.QtWidgets import QTableWidget, QHeaderView, QAbstractItemView
-from PyQt5.QtGui import QRegExpValidator, QIcon, QStandardItemModel, QStandardItem
-from PyQt5.QtCore import Qt, QRegExp, QSize, pyqtSlot, pyqtSignal
-from new_table_dialog import *
-from edit_table_dialog import *
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAbstractItemView
+from PyQt5.QtWidgets import QApplication
+
 from edit_row_dialog import *
-from import_dialog import *
+from edit_table_dialog import *
 from header_filter import *
+from import_dialog import *
+from new_table_dialog import *
 from sqlite_handler import *
 
 MIN_WIDTH = 640
 MIN_HEIGHT = 480
 DEFAULT_DB_PATH = 'cartridge.db'
 MODELS = ('725/85A', '737/83A/X', '712/35A', '728/78A', '80A/X', 'Samsung')
+
 
 class MainWindow(QWidget):
 
@@ -33,7 +33,8 @@ class MainWindow(QWidget):
 		# ============================ Управление ==========================================
 
 		self.tablesBox = QComboBox()
-		self.tablesBox.currentIndexChanged.connect(lambda: self.showTable(DEFAULT_DB_PATH, self.tablesBox.currentText()))
+		self.tablesBox.currentIndexChanged.connect(
+			lambda: self.showTable(DEFAULT_DB_PATH, self.tablesBox.currentText()))
 		addTableBtn = QPushButton()
 		addTableBtn.setObjectName('control')
 		addTableBtn.setToolTip('Добавить таблицу')
@@ -114,9 +115,8 @@ class MainWindow(QWidget):
 		# создание заголовока
 		horizontalHeader = FilterHeader(self.dbTable)
 
-		
-
-		horizontalHeader.filterActivated.connect(lambda: self.showTableContetnts(DEFAULT_DB_PATH, self.tablesBox.currentText()))
+		horizontalHeader.filterActivated.connect(
+			lambda: self.showTableContents(DEFAULT_DB_PATH, self.tablesBox.currentText()))
 		self.dbTable.setHorizontalHeader(horizontalHeader)
 
 		# ============================ Общая компоновка ====================================
@@ -149,7 +149,8 @@ class MainWindow(QWidget):
 
 	def showTable(self, dbPath: str, tableName: str) -> None:
 
-		if tableName == '': return
+		if tableName == '':
+			return
 
 		logger.info(f'Вывод заголовков таблицы {tableName}')
 
@@ -185,19 +186,21 @@ class MainWindow(QWidget):
 
 		self.dbTable.horizontalHeader().setFilterBoxes(self.cols)
 
-		self.showTableContetnts(dbPath, tableName)
+		self.showTableContents(dbPath, tableName)
 
-	def showTableContetnts(self, dbPath: str, tableName: str, sort=1) -> None:
+	def showTableContents(self, dbPath: str, tableName: str, sort=1) -> None:
 
 		logger.info(f'Вывод содержимого таблицы {tableName}')
 
-
 		filtersText = [self.dbTable.horizontalHeader().filterText(col) for col in range(self.cols)]
-		filterString = ' AND '.join([f'{self.headers[col]} LIKE "%{filtersText[col]}%"' for col in range(self.cols) if filtersText[col]])
+		filterString = ' AND '.join(
+			[f'{self.headers[col]} LIKE "%{filtersText[col]}%"' for col in range(self.cols) if filtersText[col]])
 
 		sqlRequest = f'SELECT * FROM {tableName}'
-		if filterString: sqlRequest += f' WHERE {filterString}'
-		if sort: sqlRequest += f' ORDER BY {sort}'
+		if filterString:
+			sqlRequest += f' WHERE {filterString}'
+		if sort:
+			sqlRequest += f' ORDER BY {sort}'
 
 		logger.info(sqlRequest)
 
@@ -222,7 +225,6 @@ class MainWindow(QWidget):
 		dialog = NewTableDialog()
 
 		if dialog.exec_():
-
 			logger.info(f'Добавление таблицы {dialog.tableName} со столбцами {dialog.tableHeaders}')
 
 			sqlRequest = f'CREATE TABLE IF NOT EXISTS {dialog.tableName} ({dialog.tableHeaders})'
@@ -259,7 +261,6 @@ class MainWindow(QWidget):
 		dialog.resize(dialog.sizeHint())
 
 		if dialog.exec_() == dialog.Accepted:
-
 			# внесение изменений в БД
 			sqlRequest = f'DROP TABLE {table}'
 			sqlExec(dbPath, sqlRequest, True)
@@ -279,7 +280,6 @@ class MainWindow(QWidget):
 
 			# изменение имени таблицы
 			if tableName != dialog.tableName:
-
 				logger.info(f'Изменение имени таблицы на {dialog.tableName}')
 
 				sqlRequest = f'ALTER TABLE {tableName} RENAME TO {dialog.tableName}'
@@ -297,12 +297,11 @@ class MainWindow(QWidget):
 				oldHeader = i[1]
 				newHeader = dialog.tableHeaders[index]
 				if oldHeader != newHeader:
-					
 					logger.info(f'Изменение имени столбца {oldHeader} на {newHeader}')
 
 					sqlRequest = f'ALTER TABLE {dialog.tableName} RENAME COLUMN {oldHeader} TO {newHeader}'
 					sqlExec(dbPath, sqlRequest, True)
-					
+
 					self.showTable(dbPath, tableName)
 
 	def addRow(self, dbPath: str, tableName: str) -> None:
@@ -314,7 +313,6 @@ class MainWindow(QWidget):
 		dialog = EditRowDialog(tableInfo)
 
 		if dialog.exec_():
-
 			logger.info(f'Внесение данных {dialog.values}')
 
 			# формирование списков заголовков и данных
@@ -369,14 +367,14 @@ class MainWindow(QWidget):
 					pkColIndex = i[0]
 					pkColName = i[1]
 
-			pkColValue = self.dbTable.item(self.dbTable.currentRow(), pkColIndex).text()
+					pkColValue = self.dbTable.item(self.dbTable.currentRow(), pkColIndex).text()
 
-			# внесение изменений в БД
-			sqlRequest = f'DELETE FROM {tableName} WHERE {pkColName}={pkColValue}'
-			sqlExec(dbPath, sqlRequest, True)
+					# внесение изменений в БД
+					sqlRequest = f'DELETE FROM {tableName} WHERE {pkColName}={pkColValue}'
+					sqlExec(dbPath, sqlRequest, True)
 
-			# обновить таблицу
-			self.showTable(dbPath, tableName)
+					# обновить таблицу
+					self.showTable(dbPath, tableName)
 
 	def editRow(self, dbPath: str, tableName: str) -> None:
 
@@ -391,7 +389,6 @@ class MainWindow(QWidget):
 		dialog = EditRowDialog(tableInfo, values)
 
 		if dialog.exec_():
-
 			logger.info(f'Внесение данных {dialog.values}')
 
 			# формирование списков заголовков и данных
@@ -445,7 +442,6 @@ class MainWindow(QWidget):
 			data += ','.join(str(item)) + '\n'
 
 		with open(f'{tableName}.csv', 'w') as file:
-
 			file.write(data)
 
 	def closeEvent(self, event: QEvent) -> None:
@@ -454,9 +450,9 @@ class MainWindow(QWidget):
 
 		event.accept()
 
+
 # запуск приложения
 if __name__ == '__main__':
-
 	app = QApplication(sys.argv)
 	app.setStyleSheet(open('style.qss', 'r').read())
 	win = MainWindow()
