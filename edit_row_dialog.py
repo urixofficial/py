@@ -1,7 +1,10 @@
-from loguru import logger
-from PyQt5.QtWidgets import QWidget, QDialog, QTableWidget, QLineEdit, QLabel, QPushButton, QComboBox, QCheckBox, QHBoxLayout, QVBoxLayout, QHeaderView, QDateEdit, QTableWidgetItem
-from PyQt5.QtCore import Qt, QRegExp, QDate, QEvent, pyqtSignal
 from PyQt5.QtGui import QKeyEvent
+from PyQt5.QtWidgets import QWidget, QDialog, QTableWidget, QLineEdit, QPushButton, QCheckBox, QHBoxLayout, QVBoxLayout, \
+	QHeaderView, QDateEdit, QTableWidgetItem
+from PyQt5.QtCore import Qt, pyqtSignal, QDate, QRegExp
+from sqlite_handler import *
+from loguru import logger
+
 
 class CheckBox(QWidget):
 
@@ -36,14 +39,16 @@ class CheckBox(QWidget):
 
 class EditRowDialog(QDialog):
 
-	def __init__(self, tableInfo, values=[]):
+	def __init__(self, dbPath, tableName, values=[]):
 		super().__init__()
 		
 		# позволяет отслеживать нажатия клавиш в этом окне
 		self.setFocusPolicy(Qt.StrongFocus)
 		self.setFocus()
 
-		self.tableInfo = tableInfo
+		self.dbPath = dbPath
+		self.tableName = tableName
+		self.tableInfo = getTableInfo(dbPath, tableName)
 		self.values = values
 		self.initUI()
 
@@ -165,15 +170,28 @@ class EditRowDialog(QDialog):
 	def validate(self):
 
 		valid = True
+
+		# Проверка на уникальность ID
+		if self.pkName != 'ID':
+			id = self.table.cellWidget(0, self.pkCol).text()
+			sqlRequest = f'SELECT rowid FROM {self.tableName} WHERE rowid={id}'
+			idCheck = str(sqlExec(self.dbPath, sqlRequest)[0][0])
+			if idCheck == id:
+				valid = False
+				self.table.cellWidget(0, self.pkCol).setStyleSheet('background-color: rgb(255, 140, 140)')
+				logger.warning('Значение ID не уникально')
+
 		regex = '[A-Za-zА-Яа-я0-9_]+'
 
+		# Проверка по типам данных
 		for col in range(self.cols):
 			if self.types[col] == 'NULL':
 				pass
 			elif self.types[col] == 'INTEGER':
 				# если столбец является первычным ключом и в ячейке пустая строка, то все норм - номер назначится автоматически
-				if col == self.pkCol and self.table.cellWidget(0, col).text() == '':
-					self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(140, 255, 140)')
+				if col == self.pkCol:
+					if self.table.cellWidget(0, col).text() == '':
+						self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(140, 255, 140)')
 				# проверка на соответствие только цифрам
 				elif QRegExp('[0-9]+').exactMatch(self.table.cellWidget(0, col).text()):
 					self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(140, 255, 140)')
@@ -217,6 +235,6 @@ class EditRowDialog(QDialog):
 					self.values.append(value)
 				elif isinstance(widget, QDateEdit):
 					value = widget.date().toString('yyyy-MM-dd')
-					self.values.append(f'\'{value}\'')
+					self.values.append(f'{value}')
 
 			self.accept()

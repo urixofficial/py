@@ -1,39 +1,39 @@
 import sqlite3
 
-def sqlExec(dbPath, sqlString, rw=False):
 
-	con = sqlite3.connect(dbPath)
-	cur = con.cursor()
-	cur.execute(sqlString)
+def sqlExec(dbPath: str, sqlRequest: str, rw: bool = False) -> list:
+    con = sqlite3.connect(dbPath)
+    cur = con.cursor()
+    cur.execute(sqlRequest)
 
-	if rw:
-		con.commit()
-		sqlAnswer = None
-	else:
-		sqlAnswer = cur.fetchall()
+    if rw:
+        con.commit()
+        sqlAnswer = None
+    else:
+        sqlAnswer = cur.fetchall()
 
-	con.close()
+    con.close()
 
-	return sqlAnswer
+    return sqlAnswer
 
-def sqlExecMany(dbPath, sqlString, values, rw=False):
 
-	con = sqlite3.connect(dbPath)
-	cur = con.cursor()
-	cur.executemany(sqlString, values)
+def sqlExecMany(dbPath: str, sqlString: str, values, rw: bool =False) -> list:
+    con = sqlite3.connect(dbPath)
+    cur = con.cursor()
+    cur.executemany(sqlString, values)
 
-	if rw:
-		con.commit()
-		sqlAnswer = None
-	else:
-		sqlAnswer = cur.fetchall()
+    if rw:
+        con.commit()
+        sqlAnswer = None
+    else:
+        sqlAnswer = cur.fetchall()
 
-	con.close()
+    con.close()
 
-	return sqlAnswer
+    return sqlAnswer
 
-def getTableInfo(dbPath, tableName):
 
-	sqlString = f'SELECT * FROM pragma_table_info("{tableName}")'
+def getTableInfo(dbPath: str, tableName: str) -> list:
+    sqlString = f'SELECT * FROM pragma_table_info("{tableName}")'
 
-	return sqlExec(dbPath, sqlString)
+    return sqlExec(dbPath, sqlString)

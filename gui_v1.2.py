@@ -18,7 +18,6 @@ class MainWindow(QWidget):
 	def __init__(self) -> None:
 
 		super().__init__()
-		self.logging = True
 		self.initUI()
 
 	def initUI(self) -> None:
@@ -182,6 +181,7 @@ class MainWindow(QWidget):
 		self.dbTable.horizontalHeader().setFilterBoxes(self.cols)
 
 		self.showTableContents(dbPath, tableName)
+		self.dbTable.clearSelection()
 
 	def showTableContents(self, dbPath: str, tableName: str, sort=1) -> None:
 
@@ -303,9 +303,7 @@ class MainWindow(QWidget):
 
 		logger.info(f'Добавление записи')
 
-		tableInfo = getTableInfo(dbPath, tableName)
-
-		dialog = EditRowDialog(tableInfo)
+		dialog = EditRowDialog(dbPath, tableName)
 
 		if dialog.exec_():
 			logger.info(f'Внесение данных {dialog.values}')
@@ -381,7 +379,7 @@ class MainWindow(QWidget):
 		cols = len(tableInfo)
 		values = [self.dbTable.item(row, col).text() for col in range(cols)]
 
-		dialog = EditRowDialog(tableInfo, values)
+		dialog = EditRowDialog(dbPath, tableName, values)
 
 		if dialog.exec_():
 			logger.info(f'Внесение данных {dialog.values}')
@@ -439,7 +437,7 @@ class MainWindow(QWidget):
 		with open(f'{tableName}.csv', 'w') as file:
 			file.write(data)
 
-	def closeEvent(self, event: QEvent) -> None:
+	def closeEvent(self, event) -> None:
 
 		logger.info('Закрытие окна')
 
