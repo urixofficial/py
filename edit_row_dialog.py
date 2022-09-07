@@ -1,9 +1,11 @@
 from loguru import logger
 from PyQt5.QtWidgets import QWidget, QDialog, QTableWidget, QLineEdit, QLabel, QPushButton, QComboBox, QCheckBox, QHBoxLayout, QVBoxLayout, QHeaderView, QDateEdit, QTableWidgetItem
-from PyQt5.QtCore import Qt, QRegExp, QDate, QEvent
+from PyQt5.QtCore import Qt, QRegExp, QDate, QEvent, pyqtSignal
 from PyQt5.QtGui import QKeyEvent
 
 class CheckBox(QWidget):
+
+	returnPressed = pyqtSignal()
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -15,6 +17,22 @@ class CheckBox(QWidget):
 		layout.setContentsMargins(0,0,0,0)
 		self.setLayout(layout)
 		self.setObjectName('checkBox')
+		self.setFocusPolicy(Qt.StrongFocus)
+
+	def keyPressEvent(self, event: QKeyEvent) -> None:
+
+		key = event.key()
+
+		if key == Qt.Key_Space:
+			if self.checkBox.isChecked() == False:
+				self.checkBox.setChecked(True)
+			else:
+				self.checkBox.setChecked(False)
+
+		elif key == Qt.Key_Return or key == Qt.Key_Enter:
+			self.returnPressed.emit()
+
+			# super().keyPressEvent(event)
 
 class EditRowDialog(QDialog):
 
@@ -82,6 +100,7 @@ class EditRowDialog(QDialog):
 
 			elif self.types[col] == 'BOOLEAN':
 				self.table.setCellWidget(0, col, CheckBox())
+				self.table.cellWidget(0, col).returnPressed.connect(self.validate)
 				if self.values:
 					value = True if self.values[col] == '1' else False
 					self.table.cellWidget(0, col).checkBox.setChecked(value)

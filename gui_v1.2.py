@@ -11,12 +11,7 @@ from header_filter import *
 from import_dialog import *
 from new_table_dialog import *
 from sqlite_handler import *
-
-MIN_WIDTH = 640
-MIN_HEIGHT = 480
-DEFAULT_DB_PATH = 'cartridge.db'
-MODELS = ('725/85A', '737/83A/X', '712/35A', '728/78A', '80A/X', 'Samsung')
-
+from config import *
 
 class MainWindow(QWidget):
 

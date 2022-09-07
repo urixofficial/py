@@ -6,8 +6,11 @@ def sqlExec(dbPath, sqlString, rw=False):
 	cur = con.cursor()
 	cur.execute(sqlString)
 
-	if rw: con.commit()
-	else: sqlAnswer = cur.fetchall()
+	if rw:
+		con.commit()
+		sqlAnswer = None
+	else:
+		sqlAnswer = cur.fetchall()
 
 	con.close()
 
@@ -19,8 +22,11 @@ def sqlExecMany(dbPath, sqlString, values, rw=False):
 	cur = con.cursor()
 	cur.executemany(sqlString, values)
 
-	if rw: con.commit()
-	else: sqlAnswer = cur.fetchall()
+	if rw:
+		con.commit()
+		sqlAnswer = None
+	else:
+		sqlAnswer = cur.fetchall()
 
 	con.close()
 
