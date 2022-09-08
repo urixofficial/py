@@ -61,6 +61,7 @@ class ImportCSV(QDialog):
 						data.append(line.rstrip('\n').split(';'))
 		except Exception as e:
 			print(e)
+			return
 
 		rows, cols = len(data), len(data[0])
 
