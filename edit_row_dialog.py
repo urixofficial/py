@@ -1,46 +1,18 @@
-from PyQt5.QtGui import QKeyEvent
-from PyQt5.QtWidgets import QWidget, QDialog, QTableWidget, QLineEdit, QPushButton, QCheckBox, QHBoxLayout, QVBoxLayout, \
-	QHeaderView, QDateEdit, QTableWidgetItem
-from PyQt5.QtCore import Qt, pyqtSignal, QDate, QRegExp
-from sqlite_handler import *
 from loguru import logger
 
+from PyQt5.QtWidgets import QDialog, QTableWidget, QLineEdit, QPushButton, QCheckBox, QHBoxLayout, QVBoxLayout, \
+	QHeaderView, QDateEdit, QTableWidgetItem
+from PyQt5.QtCore import QDate, QRegExp
 
-class CheckBox(QWidget):
-
-	returnPressed = pyqtSignal()
-
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		
-		self.checkBox = QCheckBox()
-		layout = QHBoxLayout()
-		layout.addWidget(self.checkBox)
-		layout.setAlignment(Qt.AlignCenter)
-		layout.setContentsMargins(0,0,0,0)
-		self.setLayout(layout)
-		self.setObjectName('checkBox')
-		self.setFocusPolicy(Qt.StrongFocus)
-
-	def keyPressEvent(self, event: QKeyEvent) -> None:
-
-		key = event.key()
-
-		if key == Qt.Key_Space:
-			if self.checkBox.isChecked() == False:
-				self.checkBox.setChecked(True)
-			else:
-				self.checkBox.setChecked(False)
-
-		elif key == Qt.Key_Return or key == Qt.Key_Enter:
-			self.returnPressed.emit()
-
-			# super().keyPressEvent(event)
+from sqlite_handler import *
+from check_box import *
 
 class EditRowDialog(QDialog):
 
 	def __init__(self, dbPath, tableName, values=[]):
 		super().__init__()
+
+		logger.info('Инициализация')
 		
 		# позволяет отслеживать нажатия клавиш в этом окне
 		self.setFocusPolicy(Qt.StrongFocus)
@@ -53,6 +25,8 @@ class EditRowDialog(QDialog):
 		self.initUI()
 
 	def initUI(self):
+
+		logger.info('Отрисовка интерфейса')
 
 		# создание диалога, присвоение имени окна
 		self.setWindowTitle('Добавление записи')
@@ -70,6 +44,9 @@ class EditRowDialog(QDialog):
 		# присвоение заголовков и чтение типов данных
 		self.types = []
 
+		# столбец в фокусе по умолчанию
+		defaultFocusCol = 0
+
 		# определение первичного ключа
 		for i in self.tableInfo:
 			if i[5]: 
@@ -78,9 +55,7 @@ class EditRowDialog(QDialog):
 				if self.pkName == 'ID':
 					self.table.setColumnHidden(i[0], True)
 					defaultFocusCol = 1
-				else:
-					self.table.setColumnHidden(i[0], False)
-					defaultFocusCol = 0
+
 				self.table.setHorizontalHeaderItem(i[0], QTableWidgetItem(f'*{i[1]}\n{i[2]}'))
 			else:
 				self.table.setHorizontalHeaderItem(i[0], QTableWidgetItem(f'{i[1]}\n{i[2]}'))
@@ -141,7 +116,7 @@ class EditRowDialog(QDialog):
 		self.okBtn.setDefault(True)
 		self.cancelBtn = QPushButton('Отмена')
 
-		# присоедниение функций к кнопкам
+		# присоединение функций к кнопкам
 		self.okBtn.clicked.connect(self.validate)
 		self.cancelBtn.clicked.connect(self.reject)
 
@@ -169,6 +144,8 @@ class EditRowDialog(QDialog):
 
 	def validate(self):
 
+		logger.info('Проверка введенных данных')
+
 		valid = True
 
 		# Проверка на уникальность ID
@@ -188,7 +165,7 @@ class EditRowDialog(QDialog):
 			if self.types[col] == 'NULL':
 				pass
 			elif self.types[col] == 'INTEGER':
-				# если столбец является первычным ключом и в ячейке пустая строка, то все норм - номер назначится автоматически
+				# если столбец является первичным ключом и в ячейке пустая строка, то все норм - номер назначится автоматически
 				if col == self.pkCol:
 					if self.table.cellWidget(0, col).text() == '':
 						self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(140, 255, 140)')

@@ -2,31 +2,26 @@ from loguru import logger
 from PyQt5.QtWidgets import QWidget, QDialog, QTableWidget, QLineEdit, QLabel, QPushButton, QComboBox, QCheckBox, \
     QHBoxLayout, QGridLayout, QHeaderView, QTableWidgetItem, QSizePolicy
 from PyQt5.QtCore import Qt, QRegExp
-
-
-class CheckBox(QWidget):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.checkBox = QCheckBox()
-        layout = QHBoxLayout()
-        layout.addWidget(self.checkBox)
-        layout.setAlignment(Qt.AlignCenter)
-        layout.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(layout)
+from check_box import *
 
 
 class NewTableDialog(QDialog):
 
     def __init__(self, tableInfo=[]):
         super().__init__()
-        self.setFocus()  # позволяет отслеживать нажатия клавиш в этом окне
+
+        logger.info('Инициализация')
+
+        # позволяет отслеживать нажатия клавиш в этом окне
+        self.setFocusPolicy(Qt.StrongFocus)
+        self.setFocus()
 
         self.primaryKey = -1
         self.initUI()
 
     def initUI(self) -> None:
+
+        logger.info('Отрисовка интерфейса')
 
         # создание диалога, присвоение имени окна
         self.setWindowTitle('Добавление таблицы')
@@ -72,6 +67,8 @@ class NewTableDialog(QDialog):
 
     def dynAdd(self) -> None:
 
+        logger.info('Динамическое добавление строки')
+
         rows = self.fieldsTable.rowCount()
 
         # если строки отстутствуют, то добавить одну и присоединить эту функцию к изменению текста
@@ -93,6 +90,8 @@ class NewTableDialog(QDialog):
                 self.fieldsTable.cellWidget(rows, 0).textChanged.connect(self.dynAdd)
 
     def dynDel(self) -> None:
+
+        logger.info('Динамическое удаление строки')
 
         rows = self.fieldsTable.rowCount()
 
@@ -136,6 +135,8 @@ class NewTableDialog(QDialog):
 
     def keyCheck(self, currentRow: int, state: bool) -> None:
 
+        logger.info('Проверка первичного ключа')
+
         if state:
             self.primaryKey = currentRow
         else:
@@ -157,6 +158,8 @@ class NewTableDialog(QDialog):
                 self.fieldsTable.cellWidget(row, 2).setEnabled(True)
 
     def validate(self) -> None:
+
+        logger.info('Проверка введенных данных')
 
         valid = True
         regex = '[^0-9][A-Za-zА-Яа-я0-9_]+'
