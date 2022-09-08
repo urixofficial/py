@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QDialog, QTableWidget, QLineEdit, QLabel, Q
     QHBoxLayout, QGridLayout, QHeaderView, QTableWidgetItem, QSizePolicy
 from PyQt5.QtCore import Qt, QRegExp
 from check_box import *
-
+from config import *
 
 class NewTableDialog(QDialog):
 
@@ -26,15 +26,18 @@ class NewTableDialog(QDialog):
         # создание диалога, присвоение имени окна
         self.setWindowTitle('Добавление таблицы')
 
+        self.setMinimumWidth(EDIT_TABLE_WIDTH)
+        self.setMinimumHeight(EDIT_TABLE_HEIGHT)
+
         self.fieldsTable = QTableWidget()
         self.fieldsTable.setColumnCount(3)
         self.fieldsTable.setRowCount(0)
         self.fieldsTable.verticalHeader().setVisible(False)
-        self.fieldsTable.setHorizontalHeaderLabels(['Поле', 'Тип данных', 'Главный ключ'])
+        self.fieldsTable.setHorizontalHeaderLabels(['Поле', 'Тип данных', 'Первичный ключ'])
         self.fieldsTable.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.fieldsTable.horizontalHeader().setSectionResizeMode(1, QHeaderView.Fixed)
         self.fieldsTable.horizontalHeader().setSectionResizeMode(2, QHeaderView.Fixed)
-        # self.fieldsTable.resizeColumnsToContents()
+        self.fieldsTable.resizeColumnsToContents()
         self.dynAdd()
 
         # создание элементов формы
@@ -48,9 +51,8 @@ class NewTableDialog(QDialog):
         self.addOkBtn.clicked.connect(self.validate)
         self.addCanceldBtn.clicked.connect(self.reject)
 
-        info = QLabel(
-            '*имена не должны начинаться с цифр, содержать пробелы или спецсимволы\nобязателено наличие одного главного ключа')
-        info.setAlignment(Qt.AlignCenter)
+        self.info = QLabel()
+        self.info.setAlignment(Qt.AlignCenter)
 
         # компоновка
         ctrlLayout = QHBoxLayout()
@@ -61,7 +63,7 @@ class NewTableDialog(QDialog):
         layout.addWidget(QLabel('Имя таблицы:'), 0, 0)
         layout.addWidget(self.tableNameEdit, 0, 1)
         layout.addWidget(self.fieldsTable, 1, 0, 1, 2)
-        layout.addWidget(info, 2, 0, 1, 2)
+        layout.addWidget(self.info, 2, 0, 1, 2)
         layout.addLayout(ctrlLayout, 3, 0, 1, 2)
         self.setLayout(layout)
 
@@ -162,6 +164,7 @@ class NewTableDialog(QDialog):
         logger.info('Проверка введенных данных')
 
         valid = True
+        status = ''
         regex = '[^0-9][A-Za-zА-Яа-я0-9_]+'
         rows = self.fieldsTable.rowCount()
 
@@ -171,6 +174,7 @@ class NewTableDialog(QDialog):
         else:
             valid = False
             self.tableNameEdit.setStyleSheet('background-color: rgb(255, 140, 140)')
+            status += '\nИмя таблицы не должно быть пустым, начинаться с цифр,\nсодержать пробелы или спецсимволы'
 
         # названия полей и наличие главного ключа
         pk = 0
@@ -185,6 +189,7 @@ class NewTableDialog(QDialog):
                 valid = False
                 self.fieldsTable.cellWidget(row, 0).setStyleSheet('background-color: rgb(255, 140, 140)')
                 logger.info('Значение не соответствует маске')
+                status += '\nИмена столбцов не должны начинаться с цифр,\nсодержать пробелы или спецсимволы'
 
             # проверка на совпадение имен
             values = [self.fieldsTable.cellWidget(i, 0).text() for i in range(row)]
@@ -194,6 +199,7 @@ class NewTableDialog(QDialog):
                     self.fieldsTable.cellWidget(index, 0).setStyleSheet('background-color: rgb(255, 140, 140)')
                     self.fieldsTable.cellWidget(row, 0).setStyleSheet('background-color: rgb(255, 140, 140)')
                     logger.warning('Совпадение имен')
+                    status += '\nИмена столбцов не должны совпадать'
 
             # проверка на первичный ключ
             if self.fieldsTable.cellWidget(row, 2).checkBox.isChecked():
@@ -206,7 +212,8 @@ class NewTableDialog(QDialog):
             valid = False
             for row in range(rows - 1):
                 self.fieldsTable.cellWidget(row, 2).setStyleSheet('background-color: rgb(255, 140, 140)')
-                logger.warning('Не указан первичный ключ')
+            logger.warning('Не указан первичный ключ')
+            status += '\nУкажите первичный ключ'
 
         if valid:
 
@@ -225,3 +232,5 @@ class NewTableDialog(QDialog):
             self.tableHeaders = ', '.join(tableHeaders)
 
             self.accept()
+        else:
+            self.info.setText(status)

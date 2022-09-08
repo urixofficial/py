@@ -1,11 +1,13 @@
 from loguru import logger
 
-from PyQt5.QtWidgets import QDialog, QTableWidget, QLineEdit, QPushButton, QCheckBox, QHBoxLayout, QVBoxLayout, \
-	QHeaderView, QDateEdit, QTableWidgetItem
+from PyQt5.QtWidgets import QDialog, QTableWidget, QLineEdit, QPushButton, QVBoxLayout, \
+	QHeaderView, QDateEdit, QTableWidgetItem, QLabel
 from PyQt5.QtCore import QDate, QRegExp
 
 from sqlite_handler import *
 from check_box import *
+from config import *
+
 
 class EditRowDialog(QDialog):
 
@@ -30,6 +32,9 @@ class EditRowDialog(QDialog):
 
 		# создание диалога, присвоение имени окна
 		self.setWindowTitle('Добавление записи')
+
+		self.setMinimumWidth(EDIT_ROW_WIDTH)
+		self.setMinimumHeight(EDIT_ROW_HEIGHT)
 
 		# количество столбцов
 		self.cols = len(self.tableInfo)
@@ -107,9 +112,11 @@ class EditRowDialog(QDialog):
 				if headerName == 'Статус':
 					self.table.cellWidget(0, col).setText('В работе')
 
+		self.table.resizeColumnsToContents()
 
-		# self.table.resizeColumnsToContents()
-		self.setMinimumWidth(640)
+		# статусбар
+		self.info = QLabel()
+		self.info.setAlignment(Qt.AlignCenter)
 
 		# кнопки принятия или отклонения окна
 		self.okBtn = QPushButton('ОК')
@@ -127,6 +134,7 @@ class EditRowDialog(QDialog):
 
 		layout = QVBoxLayout()
 		layout.addWidget(self.table)
+		layout.addWidget(self.info)
 		layout.addLayout(ctrlLayout)
 		self.setLayout(layout)
 
@@ -147,6 +155,7 @@ class EditRowDialog(QDialog):
 		logger.info('Проверка введенных данных')
 
 		valid = True
+		status = ''
 
 		# Проверка на уникальность ID
 		if self.pkName != 'ID':
@@ -157,6 +166,7 @@ class EditRowDialog(QDialog):
 				valid = False
 				self.table.cellWidget(0, self.pkCol).setStyleSheet('background-color: rgb(255, 140, 140)')
 				logger.warning('Значение ID не уникально')
+				status += '\nЗначение ID не уникально'
 
 		regex = '[A-Za-zА-Яа-я0-9_]+'
 
@@ -175,12 +185,14 @@ class EditRowDialog(QDialog):
 				else:
 					valid = False
 					self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(255, 140, 140)')
+					status += '\nПоле не должно быть пустым или содержать не цифры'
 			elif self.types[col] == 'REAL':
 				if QRegExp('[0-9\.]+').exactMatch(self.table.cellWidget(0, col).text()):
 					self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(140, 255, 140)')
 				else:
 					valid = False
 					self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(255, 140, 140)')
+					status += '\nПоле не должно быть пустым или содержать не цифры'
 			elif self.types[col] == 'BOOLEAN':
 				pass
 			elif self.types[col] == 'DATE':
@@ -193,6 +205,7 @@ class EditRowDialog(QDialog):
 				else:
 					valid = False
 					self.table.cellWidget(0, col).setStyleSheet('background-color: rgb(255, 140, 140)')
+					status += '\nПоле не должно быть пустым или содержать спецсимволы'
 
 		if valid:
 
@@ -215,3 +228,5 @@ class EditRowDialog(QDialog):
 					self.values.append(f'{value}')
 
 			self.accept()
+		else:
+			self.info.setText(status)
