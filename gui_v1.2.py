@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAbstractItemView
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QFileDialog
 
 from edit_row_dialog import *
 from edit_table_dialog import *
@@ -422,7 +422,7 @@ class MainWindow(QWidget):
 
 		logger.info('Экспорт в CSV')
 
-		# запрос данных из базы
+		# формирование вывода
 		tableInfo = getTableInfo(dbPath, tableName)
 		headers = [col[1] for col in tableInfo]
 
@@ -434,8 +434,15 @@ class MainWindow(QWidget):
 		for item in items:
 			data += ','.join(str(item)) + '\n'
 
-		with open(f'{tableName}.csv', 'w') as file:
-			file.write(data)
+		# диалог сохранения файла
+		options = QFileDialog.Options()
+		options |= QFileDialog.DontUseNativeDialog
+		fileName, _ = QFileDialog.getSaveFileName(self, "Сохранить файл", f"{tableName}",
+												  "Файлы CSV (*.csv);;Все файлы (*)", options=options)
+		# сохранить файл
+		if fileName:
+			with open(f'{fileName}.csv', 'w') as file:
+				file.write(data)
 
 	def closeEvent(self, event) -> None:
 
