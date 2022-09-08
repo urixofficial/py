@@ -177,12 +177,25 @@ class NewTableDialog(QDialog):
 
         for row in range(rows - 1):
 
-            if QRegExp(regex).exactMatch(self.fieldsTable.cellWidget(row, 0).text()):
+            # проверка на соответствие маске
+            text = self.fieldsTable.cellWidget(row, 0).text()
+            if QRegExp(regex).exactMatch(text):
                 self.fieldsTable.cellWidget(row, 0).setStyleSheet('background-color: rgb(140, 255, 140)')
             else:
                 valid = False
                 self.fieldsTable.cellWidget(row, 0).setStyleSheet('background-color: rgb(255, 140, 140)')
+                logger.info('Значение не соответствует маске')
 
+            # проверка на совпадение имен
+            values = [self.fieldsTable.cellWidget(i, 0).text() for i in range(row)]
+            for index, value in enumerate(values):
+                if text == value:
+                    valid = False
+                    self.fieldsTable.cellWidget(index, 0).setStyleSheet('background-color: rgb(255, 140, 140)')
+                    self.fieldsTable.cellWidget(row, 0).setStyleSheet('background-color: rgb(255, 140, 140)')
+                    logger.warning('Совпадение имен')
+
+            # проверка на первичный ключ
             if self.fieldsTable.cellWidget(row, 2).checkBox.isChecked():
                 pk += 1
 
@@ -193,6 +206,7 @@ class NewTableDialog(QDialog):
             valid = False
             for row in range(rows - 1):
                 self.fieldsTable.cellWidget(row, 2).setStyleSheet('background-color: rgb(255, 140, 140)')
+                logger.warning('Не указан первичный ключ')
 
         if valid:
 
