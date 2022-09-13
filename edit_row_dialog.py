@@ -160,9 +160,10 @@ class EditRowDialog(QDialog):
 		# Проверка на уникальность ID
 		if self.pkName != 'ID':
 			id = self.table.cellWidget(0, self.pkCol).text()
-			sqlRequest = f'SELECT rowid FROM {self.tableName} WHERE rowid={id}'
-			idCheck = str(sqlExec(self.dbPath, sqlRequest)[0][0])
-			if idCheck == id:
+			sqlRequest = f'SELECT * FROM {self.tableName} WHERE rowid={id}'
+			idCheck = str(sqlExec(self.dbPath, sqlRequest))
+			# print(idCheck, len(idCheck))
+			if len(idCheck) != 2:
 				valid = False
 				self.table.cellWidget(0, self.pkCol).setStyleSheet('background-color: rgb(255, 140, 140)')
 				logger.warning('Значение ID не уникально')
@@ -225,7 +226,7 @@ class EditRowDialog(QDialog):
 					self.values.append(value)
 				elif isinstance(widget, QDateEdit):
 					value = widget.date().toString('yyyy-MM-dd')
-					self.values.append(f'{value}')
+					self.values.append(f'\'{value}\'')
 
 			self.accept()
 		else:

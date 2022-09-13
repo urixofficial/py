@@ -390,6 +390,7 @@ class MainWindow(QWidget):
 
 			# внесение изменений в БД
 			sqlRequest = f'UPDATE OR IGNORE {tableName} SET ({headers}) = ({values});'
+			print(sqlRequest)
 			sqlExec(dbPath, sqlRequest, True)
 
 			# обновить таблицу
